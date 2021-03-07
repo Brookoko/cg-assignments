@@ -1,13 +1,17 @@
 namespace ImageConverter
 {
     using System;
-    using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
 
     public static class ByteExtension
     {
+        public static byte[] ToBytes(this string s)
+        {
+            return Encoding.UTF8.GetBytes(s); 
+        }
+        
         public static byte[] FromHexString(this string s)
         {
             return Enumerable.Range(0, s.Length)

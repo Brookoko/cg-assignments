@@ -11,9 +11,10 @@ namespace ImageConverter.Png
     {
         public byte[,] Filter(byte[] decoded, Header header)
         {
+            var bytesPerPixel = GetBytesPerPixel(header.colorType);
             var h = header.height;
-            var w = header.width;
-            var filtered = new byte[w, h];
+            var w = header.width * bytesPerPixel;
+            var filtered = new byte[h, w];
             var depth = header.bitDepth;
             
             for (var i = 0; i < h; i++)
@@ -35,14 +36,17 @@ namespace ImageConverter.Png
             return filtered;
         }
         
+        private int GetBytesPerPixel(ColorType type)
+        {
+            return type == ColorType.Truecolor || type == ColorType.TruecolorAlpha ? 3 : 1;
+        }
+        
         public byte[] ReverseFilter(byte[,] data, Header header)
         {
             var h = data.GetLength(0);
             var w = data.GetLength(1) + 1;
             var filtered = new byte[w * h];
-            header.bitDepth = 8;
-            header.filterType = FilterType.None;
-            var function = FilterFunctionLibrary.GetReverseFunction(FilterType.None);
+            var function = FilterFunctionLibrary.GetReverseFunction(header.filterType);
             
             for (var i = 0; i < h; i++)
             {
@@ -50,9 +54,12 @@ namespace ImageConverter.Png
                 for (var j = 1; j < w; j++)
                 {
                     var x = data[i, j - 1];
-                    var a = j > 1 ? filtered[j - 1 + i * w] : 0;
-                    var b = i > 0 ? filtered[j + (i - 1) * w] : 0;
-                    var c = i > 0 && j > 1 ? filtered[j - 1 + (i - 1) * w] : 0;
+                    var ia = j - 1 + i * w;
+                    var a = j > 1 ? filtered[ia] : 0;
+                    var ib = j + (i - 1) * w;
+                    var b = i > 0 ? filtered[ib] : 0;
+                    var ic = j - 1 + (i - 1) * w;
+                    var c = i > 0 && j > 1 ? filtered[ic] : 0;
                     var v = function(x, a, b, c);
                     filtered[j + i * w] = (byte) (v % 256);
                 }

@@ -14,8 +14,9 @@ namespace ImageConverter.Png
                     return "IDAT";
                 case ChunkType.End:
                     return "IEND";
+                default:
+                    return "Unknown";
             }
-            return "Unknown";
         }
         
         public static ChunkType FromHeader(string name)

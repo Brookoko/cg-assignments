@@ -1,7 +1,6 @@
 namespace ImageConverter.Png
 {
     using System.Linq;
-    using System.Text;
 
     internal class Chunk
     {
@@ -30,20 +29,17 @@ namespace ImageConverter.Png
         
         private int CalculateCrc()
         {
-            var typeBytes = Encoding.UTF8.GetBytes(type.ToHeader());
+            var typeBytes = type.ToHeader().ToBytes();
             var crcBytes = typeBytes.Concat(data).ToArray();
             return (int) CrcExtractor.Extract(crcBytes);
         }
         
         public byte[] ToBytes()
         {
-            var sizeBytes = size.ToBytes();
-            var typeBytes = Encoding.UTF8.GetBytes(type.ToHeader());
-            var crcBytes = crc.ToBytes();
-            return sizeBytes
-                .Concat(typeBytes)
+            return size.ToBytes()
+                .Concat(type.ToHeader().ToBytes())
                 .Concat(data)
-                .Concat(crcBytes)
+                .Concat(crc.ToBytes())
                 .ToArray();
         }
     }

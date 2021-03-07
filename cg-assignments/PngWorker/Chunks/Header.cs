@@ -1,7 +1,6 @@
 namespace ImageConverter.Png
 {
     using System.Collections.Generic;
-    using System.Linq;
 
     internal class Header : IDecodedChunk
     {

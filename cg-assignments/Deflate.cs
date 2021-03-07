@@ -7,6 +7,8 @@ namespace ImageConverter
 
     public class Deflate
     {
+        private static byte[] Flags => new byte[] {0x78, 0x9C};
+        
         public byte[] Encode(byte[] data)
         {
             using (var ms = new MemoryStream(data))
@@ -17,7 +19,7 @@ namespace ImageConverter
                     {
                         ms.CopyTo(deflate);
                         deflate.Close();
-                        return res.ToArray();
+                        return Flags.Concat(res.ToArray()).ToArray();
                     }
                 }
             }
