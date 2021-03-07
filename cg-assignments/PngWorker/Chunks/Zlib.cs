@@ -31,5 +31,17 @@ namespace ImageConverter.Png
         {
             return chunks.All(c => c.type == ChunkType.Data);
         }
+        
+        public Chunk ToChunk()
+        {
+            var window = windowSize.ToBytes()[3];
+            var compress = compression.ToBytes()[3];
+            var cmf = (byte) ((window << 4) | (compress & 0x0F));
+            var level = compressionLevel.ToBytes()[3];
+            var dictionary = (byte) (hasDictionary ? 1 : 0);
+            var flag = (byte) ((level << 6) | (dictionary << 5) | check);
+            var concat = new[] {cmf, flag}.Concat(data).ToArray();
+            return new Chunk(concat, ChunkType.Data);
+        }
     }
 }

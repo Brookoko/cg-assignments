@@ -11,7 +11,7 @@ namespace ImageConverter.Png
         private static int chunkCrc = 4;
         private static int chunkSize = 4;
         
-        private static string pngFormatHeader = "89-50-4E-47-0D-0A-1A-0A";
+        private static string pngFormatHeader = "89504E470D0A1A0A";
         
         private readonly Deflate deflate = new Deflate();
         private readonly IChunkConverter chunkConverter = new ChunkConverter();
@@ -54,30 +54,73 @@ namespace ImageConverter.Png
             var size = bytes.ExtractInt(index);
             i = index + chunkSize + chunkType + size + chunkCrc;
             var typeString = bytes.ExtractString(index + chunkSize, chunkType);
-            return new Chunk()
+            var chunk = new Chunk()
             {
                 size = size,
                 type = ChunkExtension.FromHeader(typeString),
                 data = bytes.Skip(index + 8).Take(size).ToArray(),
                 crc = bytes.ExtractInt(i - chunkCrc),
             };
+            if (chunk.type != ChunkType.Unknown && !chunk.IsValid())
+            {
+                throw new ImageDecodingException($"Invalid chunk detected: {chunk.type}");
+            }
+            return chunk;
         }
         
         private void CheckCompability(Header header, Zlib zlib)
         {
             if (header.colorType != ColorType.Indexed)
             {
-                throw new Exception();
+                throw new ImageDecodingException("Do not support other color type except indexed");
             }
             if (zlib.compression != 8 || zlib.windowSize != 7 || zlib.hasDictionary)
             {
-                throw new Exception();
+                throw new ImageDecodingException("Unsupported compression algorithm");
             }
         }
         
         public byte[] Encode(Image image)
         {
-            throw new NotImplementedException();
+            var header = CreateHeader(image);
+            var data = image.ToBytes();
+            var filtered = byteFilterer.ReverseFilter(data, header);
+            var encoded = deflate.Encode(filtered);
+            
+            var headerChunk = header.ToChunk();
+            var dataChunk = CreateDataChunk(encoded);
+            var endChunk = CreateEndChunk();
+
+            return pngFormatHeader.FromHexString()
+                .Concat(headerChunk.ToBytes())
+                .Concat(dataChunk.ToBytes())
+                .Concat(endChunk.ToBytes())
+                .ToArray();
+        }
+        
+        private Header CreateHeader(Image image)
+        {
+            return new Header()
+            {
+                bitDepth = 8,
+                colorType = ColorType.Truecolor,
+                compression = 0,
+                filterType = FilterType.None,
+                height = image.Height,
+                width = image.Width,
+                transferMethod = 0
+            };
+        }
+        
+        private Chunk CreateDataChunk(byte[] data)
+        {
+            var flags = new byte[] {0x78, 0x9C};
+            return new Chunk(flags.Concat(data).ToArray(), ChunkType.Data);
+        }
+        
+        private Chunk CreateEndChunk()
+        {
+            return new Chunk(new byte[0], ChunkType.End);
         }
     }
 }

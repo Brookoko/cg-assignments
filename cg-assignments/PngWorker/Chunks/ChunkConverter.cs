@@ -1,6 +1,5 @@
 namespace ImageConverter.Png
 {
-    using System;
     using System.Collections.Generic;
     using System.Linq;
     
@@ -20,7 +19,7 @@ namespace ImageConverter.Png
             var filteredChunks = chunks.Where(c => c.type == type).ToArray();
             if (filteredChunks.Length == 0)
             {
-                throw new Exception();
+                throw new ImageDecodingException($"No chunks of type: {type.ToHeader()}");
             }
             return Convert<T>(filteredChunks);
         }
@@ -30,7 +29,7 @@ namespace ImageConverter.Png
             var decoded = new T();
             if (!decoded.IsCompatible(chunks))
             {
-                throw new Exception();
+                throw new ImageDecodingException($"Cannot convert chunks to type: {nameof(T)}");
             }
             decoded.Init(chunks);
             return decoded;

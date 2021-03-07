@@ -1,6 +1,7 @@
 namespace ImageConverter.Png
 {
     using System.Collections.Generic;
+    using System.Linq;
 
     internal class Palette : IDecodedChunk
     {
@@ -35,8 +36,8 @@ namespace ImageConverter.Png
         
         public Image Map(byte[,] data)
         {
-            var h = data.GetLength(1);
-            var w = data.GetLength(0);
+            var h = data.GetLength(0);
+            var w = data.GetLength(1);
             var image = new Image(w, h);
             for (var i = 0; i < h; i++)
             {
@@ -50,6 +51,12 @@ namespace ImageConverter.Png
                 }
             }
             return image;
+        }
+        
+        public Chunk ToChunk()
+        {
+            var data = palette.SelectMany(p => p.Value.ToBytes()).ToArray();
+            return new Chunk(data, ChunkType.Palette);
         }
     }
 }

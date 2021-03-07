@@ -1,5 +1,8 @@
 namespace ImageConverter.Png
 {
+    using System.Collections.Generic;
+    using System.Linq;
+
     internal class Header : IDecodedChunk
     {
         private static int headerChunkSize = 13;
@@ -9,7 +12,7 @@ namespace ImageConverter.Png
         public byte bitDepth;
         public ColorType colorType;
         public byte compression;
-        public FilterType FilterType;
+        public FilterType filterType;
         public byte transferMethod;
         
         public void Init(Chunk[] chunks)
@@ -20,7 +23,7 @@ namespace ImageConverter.Png
             bitDepth = chunk.data[8];
             colorType = (ColorType) chunk.data[9];
             compression = chunk.data[10];
-            FilterType = (FilterType) chunk.data[11];
+            filterType = (FilterType) chunk.data[11];
             transferMethod = chunk.data[12];
         }
         
@@ -32,6 +35,19 @@ namespace ImageConverter.Png
             }
             var chunk = chunks[0];
             return chunk.type == ChunkType.Header && chunk.size == headerChunkSize;
+        }
+        
+        public Chunk ToChunk()
+        {
+            var data =new List<byte>();
+            data.AddRange(width.ToBytes());
+            data.AddRange(height.ToBytes());
+            data.Add(bitDepth);
+            data.Add((byte) colorType);
+            data.Add(compression);
+            data.Add((byte) filterType);
+            data.Add(transferMethod);
+            return new Chunk(data.ToArray(), ChunkType.Header);
         }
     }
 }

@@ -5,8 +5,24 @@ namespace ImageConverter
     using System.IO.Compression;
     using System.Linq;
 
-    internal class Deflate
+    public class Deflate
     {
+        public byte[] Encode(byte[] data)
+        {
+            using (var ms = new MemoryStream(data))
+            {
+                using (var res = new MemoryStream())
+                {
+                    using (var deflate = new DeflateStream(res, CompressionMode.Compress))
+                    {
+                        ms.CopyTo(deflate);
+                        deflate.Close();
+                        return res.ToArray();
+                    }
+                }
+            }
+        }
+        
         public byte[] Decode(byte[] data)
         {
             using (var ms = new MemoryStream(data))
@@ -27,7 +43,7 @@ namespace ImageConverter
             }
             return data;
         }
-
+        
         private byte[] DecodeChunk(byte[] chunk)
         {
             var isEnd = ByteExtension.ReadBits(chunk, 0, 1);

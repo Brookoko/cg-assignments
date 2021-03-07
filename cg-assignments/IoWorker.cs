@@ -24,6 +24,7 @@ namespace ImageConverter
         
         public void Write(byte[] bytes, string path)
         {
+            path = path.Replace('/', Path.DirectorySeparatorChar);
             File.WriteAllBytes(path, bytes);
         }
     }

@@ -5,5 +5,7 @@ namespace ImageConverter.Png
         void Init(Chunk[] chunks);
         
         bool IsCompatible(Chunk[] chunks);
+        
+        Chunk ToChunk();
     }
 }
