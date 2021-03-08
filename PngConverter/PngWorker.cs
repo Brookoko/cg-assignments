@@ -37,7 +37,12 @@ namespace ImageConverter.Png
         public bool CanWorkWith(byte[] bytes, string extension)
         {
             var format = bytes.Take(8).ToHexString();
-            return format == pngFormatHeader && extension == "png";
+            return format == pngFormatHeader && CanWorkWith(extension);
+        }
+        
+        public bool CanWorkWith(string extension)
+        {
+            return extension == "png";
         }
         
         public byte[] Encode(Image image)

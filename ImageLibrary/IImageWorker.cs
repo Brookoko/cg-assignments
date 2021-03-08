@@ -14,5 +14,7 @@ namespace ImageConverter
     public interface IImageEncoder
     {
         byte[] Encode(Image image);
+        
+        bool CanWorkWith(string extension);
     }
 }

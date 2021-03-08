@@ -1,6 +1,10 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "cg-assignments", "cg-assignments\cg-assignments.csproj", "{DA2E5037-DCEB-47C1-8FCD-F34D28C9E75D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImageConverter", "ImageConverter\ImageConverter.csproj", "{DA2E5037-DCEB-47C1-8FCD-F34D28C9E75D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImageLibrary", "ImageLibrary\ImageLibrary.csproj", "{DF02FA12-9733-4E22-914F-B5D60CE4340F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PngConverter", "PngConverter\PngConverter.csproj", "{2A3D6883-6CC4-457E-B092-55E6DA951375}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -12,5 +16,13 @@ Global
 		{DA2E5037-DCEB-47C1-8FCD-F34D28C9E75D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DA2E5037-DCEB-47C1-8FCD-F34D28C9E75D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DA2E5037-DCEB-47C1-8FCD-F34D28C9E75D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DF02FA12-9733-4E22-914F-B5D60CE4340F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DF02FA12-9733-4E22-914F-B5D60CE4340F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DF02FA12-9733-4E22-914F-B5D60CE4340F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DF02FA12-9733-4E22-914F-B5D60CE4340F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2A3D6883-6CC4-457E-B092-55E6DA951375}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2A3D6883-6CC4-457E-B092-55E6DA951375}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2A3D6883-6CC4-457E-B092-55E6DA951375}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2A3D6883-6CC4-457E-B092-55E6DA951375}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

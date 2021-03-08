@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <OutputType>Exe</OutputType>
+        <TargetFramework>net48</TargetFramework>
+        <RootNamespace>cg_assignments</RootNamespace>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\ImageLibrary\ImageLibrary.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Png" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Reference Include="PngConverter, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+        <HintPath>..\libs\PngConverter.dll</HintPath>
+      </Reference>
+    </ItemGroup>
+
+</Project>
