@@ -11,7 +11,7 @@ namespace ImageConverter.Png
         public byte bitDepth;
         public ColorType colorType;
         public byte compression;
-        public FilterType filterType;
+        public byte filterMethod;
         public byte transferMethod;
         
         public void Init(Chunk[] chunks)
@@ -22,7 +22,7 @@ namespace ImageConverter.Png
             bitDepth = chunk.data[8];
             colorType = (ColorType) chunk.data[9];
             compression = chunk.data[10];
-            filterType = (FilterType) chunk.data[11];
+            filterMethod = chunk.data[11];
             transferMethod = chunk.data[12];
         }
         
@@ -44,7 +44,7 @@ namespace ImageConverter.Png
             data.Add(bitDepth);
             data.Add((byte) colorType);
             data.Add(compression);
-            data.Add((byte) filterType);
+            data.Add((byte) filterMethod);
             data.Add(transferMethod);
             return new Chunk(data.ToArray(), ChunkType.Header);
         }

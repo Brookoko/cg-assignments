@@ -21,7 +21,7 @@ namespace ImageConverter.Png
             var zlib = chunkConverter.Extract<Zlib>(chunks, ChunkType.Data);
             
             var decoded = deflate.Decode(zlib.data);
-            var filtered = byteFilterer.Filter(decoded, header);
+            var filtered = byteFilterer.ReverseFilter(decoded, header);
             var image = header.colorType == ColorType.Indexed ?
                 MapIndexes(filtered, chunks) :
                 imageByteConverter.ToImage(filtered, header.colorType);
@@ -44,7 +44,7 @@ namespace ImageConverter.Png
         {
             var header = CreateHeader(image);
             var data = imageByteConverter.ToBytes(image);
-            var filtered = byteFilterer.ReverseFilter(data, header);
+            var filtered = byteFilterer.Filter(data, FilterType.None);
             var encoded = deflate.Encode(filtered);
             
             var chunks = new [] {header.ToChunk(), CreateDataChunk(encoded), CreateEndChunk()};
@@ -61,7 +61,7 @@ namespace ImageConverter.Png
                 bitDepth = 8,
                 colorType = ColorType.Truecolor,
                 compression = 0,
-                filterType = FilterType.None,
+                filterMethod = 0,
                 height = image.Height,
                 width = image.Width,
                 transferMethod = 0
