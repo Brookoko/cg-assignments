@@ -29,7 +29,7 @@ namespace ImageConverter.Png
             var decoded = new T();
             if (!decoded.IsCompatible(chunks))
             {
-                throw new ImageDecodingException($"Cannot convert chunks to type: {nameof(T)}");
+                throw new ImageDecodingException($"Cannot convert chunks to type: {typeof(T)}");
             }
             decoded.Init(chunks);
             return decoded;

@@ -8,16 +8,11 @@
 
     <ItemGroup>
       <ProjectReference Include="..\ImageLibrary\ImageLibrary.csproj" />
+      <ProjectReference Include="..\PngConverter\PngConverter.csproj" />
     </ItemGroup>
 
     <ItemGroup>
       <Folder Include="Png" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <Reference Include="PngConverter, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
-        <HintPath>..\libs\PngConverter.dll</HintPath>
-      </Reference>
     </ItemGroup>
 
 </Project>

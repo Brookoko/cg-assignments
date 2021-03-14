@@ -1,6 +1,7 @@
 namespace ImageConverter.Png
 {
     using System.Collections.Generic;
+    using System.IO;
     using System.Linq;
 
     public class PngWorker : IImageWorker
@@ -20,12 +21,22 @@ namespace ImageConverter.Png
             var header = chunkConverter.Extract<Header>(chunks, ChunkType.Header);
             var zlib = chunkConverter.Extract<Zlib>(chunks, ChunkType.Data);
             
+            CheckCompability(header, zlib);
+            
             var decoded = deflate.Decode(zlib.data);
             var filtered = byteFilterer.ReverseFilter(decoded, header);
             var image = header.colorType == ColorType.Indexed ?
                 MapIndexes(filtered, chunks) :
                 imageByteConverter.ToImage(filtered, header.colorType);
             return image;
+        }
+        
+        private void CheckCompability(Header header, Zlib zlib)
+        {
+            if (header.colorType == ColorType.TruecolorAlpha || header.colorType == ColorType.GreyscaleAlpha)
+            {
+                throw new ImageDecodingException("Alpha is not supported");
+            }
         }
         
         private Image MapIndexes(byte[,] filtered, List<Chunk> chunks)

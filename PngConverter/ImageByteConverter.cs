@@ -50,7 +50,7 @@ namespace ImageConverter.Png
         
         private int GetBytesPerPixel(ColorType type)
         {
-            return type == ColorType.Truecolor || type == ColorType.TruecolorAlpha ? 3 : 1;
+            return type == ColorType.Truecolor ? 3 : 1;
         }
         
         public T[] GetRow<T>(T[,] matrix, int rowNumber)

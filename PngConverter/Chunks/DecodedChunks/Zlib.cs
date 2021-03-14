@@ -14,15 +14,18 @@ namespace ImageConverter.Png
         public void Init(Chunk[] chunks)
         {
             var firstChunk = chunks[0];
+            var stream = new BitStream();
             
             var cmf = firstChunk.data[0];
-            windowSize = cmf.ReadBits(0, 4);
-            compression = cmf.ReadBits(4, 4);
+            stream.Write(cmf);
+            windowSize = stream.Read(4);
+            compression = stream.Read(4);
             
             var flag = firstChunk.data[1];
-            compressionLevel = flag.ReadBits(0, 2);
-            hasDictionary = flag.ReadBits(2, 1) == 1;
-            check = flag.ReadBits(3, 5);
+            stream.Write(flag);
+            compressionLevel = stream.Read(2);
+            hasDictionary = stream.Read(1) == 1;
+            check = stream.Read(5);
             
             data = firstChunk.data
                 .Skip(2).Take(firstChunk.size)
@@ -32,7 +35,10 @@ namespace ImageConverter.Png
         
         public bool IsCompatible(Chunk[] chunks)
         {
-            return chunks.All(c => c.type == ChunkType.Data);
+            var firstChunk = chunks[0];
+            return chunks.All(c => c.type == ChunkType.Data) &&
+                   firstChunk.data[0] == 0x78 &&
+                   firstChunk.data[1] == 0x9C;
         }
         
         public Chunk ToChunk()

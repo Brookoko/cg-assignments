@@ -41,31 +41,5 @@ namespace ImageConverter
             var bytes = BitConverter.GetBytes(i);
             return BitConverter.IsLittleEndian ? bytes.Reverse().ToArray() : bytes;
         }
-        
-        public static int ReadBits(this byte[] bytes, int offset, int bits)
-        {
-            var result = 0;
-            for (var i = offset; i < bits + offset; i++)
-            {
-                var index = i / 8;
-                var b = bytes[index];
-                var bitOffset = 7 - (i - index * 8);
-                var bit = (b >> bitOffset) & 1;
-                result = (result << 1) + bit;
-            }
-            return result;
-        }
-        
-        public static int ReadBits(this byte b, int offset, int bits)
-        {
-            var result = 0;
-            for (var i = offset; i < bits + offset; i++)
-            {
-                var bitOffset = 7 - i;
-                var bit = (b >> bitOffset) & 1;
-                result = (result << 1) + bit;
-            }
-            return result;
-        }
     }
 }
