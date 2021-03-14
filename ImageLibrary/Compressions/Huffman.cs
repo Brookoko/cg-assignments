@@ -143,7 +143,7 @@ namespace ImageConverter
                     return Array.IndexOf(codes, code);
                 }
             }
-            throw new ImageDecodingException("Failed to decode huffman code");
+            throw new CompressionException("Failed to decode huffman code");
         }
     }
 }

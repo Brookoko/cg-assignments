@@ -23,8 +23,6 @@ namespace ImageConverter
             decodeFunctions[3] = ThrowOnReservedValue;
         }
         
-
-        
         public byte[] Encode(byte[] data)
         {
             using (var ms = new MemoryStream(data))
@@ -65,7 +63,7 @@ namespace ImageConverter
             var nlen = stream.Read(2) ^ 0xffff;
             if (len != nlen)
             {
-                throw new ImageDecodingException("Invalid block lenght");
+                throw new CompressionException("Invalid block lenght");
             }
             var block = stream.Read(len * 8);
             var data = block.ToBytes()

@@ -76,10 +76,5 @@ namespace ImageConverter
                 offset = (lower + 1) * 8;
             }
         }
-        
-        public void MoveBack(int bits)
-        {
-            offset -= bits;
-        }
     }
 }

@@ -44,7 +44,7 @@ namespace ImageConverter.Png
             data.Add(bitDepth);
             data.Add((byte) colorType);
             data.Add(compression);
-            data.Add((byte) filterMethod);
+            data.Add(filterMethod);
             data.Add(transferMethod);
             return new Chunk(data.ToArray(), ChunkType.Header);
         }

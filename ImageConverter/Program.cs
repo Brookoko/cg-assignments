@@ -1,9 +1,8 @@
 ﻿namespace ImageConverter
 {
-    using System;
-
     public static class Program
     {
+        private static IPluginProvider pluginProvider;
         private static IIoWorker ioWorker;
         private static IArgumentsParser parser;
         private static IImageWorkerProvider workerProvider;
@@ -27,9 +26,11 @@
         
         private static void Initialize()
         {
+            pluginProvider = new PluginProvider();
+            pluginProvider.LoadPlugins();
             ioWorker = new IoWorker();
             parser = new ArgumentsParser();
-            workerProvider = new ImageWorkerProvider();
+            workerProvider = new ImageWorkerProvider(pluginProvider);
         }
     }
 }

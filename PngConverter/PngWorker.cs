@@ -1,7 +1,6 @@
 namespace ImageConverter.Png
 {
     using System.Collections.Generic;
-    using System.IO;
     using System.Linq;
 
     public class PngWorker : IImageWorker
@@ -21,7 +20,7 @@ namespace ImageConverter.Png
             var header = chunkConverter.Extract<Header>(chunks, ChunkType.Header);
             var zlib = chunkConverter.Extract<Zlib>(chunks, ChunkType.Data);
             
-            CheckCompability(header, zlib);
+            CheckCompability(header);
             
             var decoded = deflate.Decode(zlib.data);
             var filtered = byteFilterer.ReverseFilter(decoded, header);
@@ -31,7 +30,7 @@ namespace ImageConverter.Png
             return image;
         }
         
-        private void CheckCompability(Header header, Zlib zlib)
+        private void CheckCompability(Header header)
         {
             if (header.colorType == ColorType.TruecolorAlpha || header.colorType == ColorType.GreyscaleAlpha)
             {

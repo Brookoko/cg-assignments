@@ -2,9 +2,7 @@ namespace ImageConverter
 {
     using System;
     using System.Collections.Generic;
-    using System.IO;
     using System.Linq;
-    using System.Reflection;
 
     public interface IImageWorkerProvider
     {
@@ -18,16 +16,13 @@ namespace ImageConverter
         private readonly List<IImageEncoder> encoders;
         private readonly List<IImageDecoder> decoders;
      
-        private readonly ITypeLoader typeLoader = new TypeLoader();
-        
-        public ImageWorkerProvider()
+        public ImageWorkerProvider(IPluginProvider pluginProvider)
         {
-            var types = typeLoader.LoadAllTypes();
-            encoders = types
+            encoders = pluginProvider.Types
                 .Where(t => typeof(IImageEncoder).IsAssignableFrom(t) && !t.IsInterface)
                 .Select(t => (IImageEncoder) Activator.CreateInstance(t))
                 .ToList();
-            decoders = types
+            decoders = pluginProvider.Types
                 .Where(t => typeof(IImageDecoder).IsAssignableFrom(t) && !t.IsInterface)
                 .Select(t => (IImageDecoder) Activator.CreateInstance(t))
                 .ToList();

@@ -11,8 +11,4 @@
       <ProjectReference Include="..\PngConverter\PngConverter.csproj" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="Png" />
-    </ItemGroup>
-
 </Project>

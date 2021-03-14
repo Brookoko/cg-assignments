@@ -41,7 +41,7 @@ namespace ImageConverter.Png
             };
             if (chunk.type != ChunkType.Unknown && !chunk.IsValid())
             {
-                throw new ImageDecodingException($"Invalid chunk detected: {chunk.type}");
+                throw new ImageDecodingException($"Invalid png chunk detected: {chunk.type}");
             }
             return chunk;
         }
