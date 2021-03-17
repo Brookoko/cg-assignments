@@ -59,13 +59,13 @@ namespace ImageConverter
         private void DecodeUncompressed(BitStream stream, List<byte> bytes)
         {
             stream.ReadToByteBoundary();
-            var len = stream.Read(2);
-            var nlen = stream.Read(2) ^ 0xffff;
+            var len = stream.ReadReverse(2);
+            var nlen = stream.ReadReverse(2) ^ 0xffff;
             if (len != nlen)
             {
                 throw new CompressionException("Invalid block lenght");
             }
-            var block = stream.Read(len * 8);
+            var block = stream.ReadReverse(len * 8);
             var data = block.ToBytes()
                 .Reverse().Take(len)
                 .Reverse().ToArray();
