@@ -140,8 +140,17 @@ namespace ImageConverter
                 
                 if (hasCode)
                 {
-                    return Array.IndexOf(codes, code);
+                    return GetIndex(code, i);
                 }
+            }
+            throw new CompressionException("Failed to decode huffman code");
+        }
+
+        private int GetIndex(int code, int bitLength)
+        {
+            for (var i = 0; i < codes.Length; i++)
+            {
+                if (codeBitLengths[i] == bitLength && codes[i] == code) return i;
             }
             throw new CompressionException("Failed to decode huffman code");
         }

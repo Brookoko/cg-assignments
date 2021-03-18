@@ -35,10 +35,7 @@ namespace ImageConverter.Png
         
         public bool IsCompatible(Chunk[] chunks)
         {
-            var firstChunk = chunks[0];
-            return chunks.All(c => c.type == ChunkType.Data) &&
-                   firstChunk.data[0] == 0x78 &&
-                   firstChunk.data[1] == 0x9C;
+            return chunks.All(c => c.type == ChunkType.Data);
         }
         
         public Chunk ToChunk()

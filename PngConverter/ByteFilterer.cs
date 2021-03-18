@@ -11,7 +11,7 @@ namespace ImageConverter.Png
     {
         public byte[,] ReverseFilter(byte[] decoded, Header header)
         {
-            var bytesPerPixel = GetBytesPerPixel(header.colorType);
+            var bytesPerPixel = header.colorType.GetBytesPerPixel();
             var h = header.height;
             var w = header.width * bytesPerPixel;
             var filtered = new byte[h, w];
@@ -32,13 +32,9 @@ namespace ImageConverter.Png
                     var v = function(x, a, b, c);
                     filtered[i, j] = (byte) ((v + 256) % 256);
                 }
+                stream.ReadToByteBoundary();
             }
             return filtered;
-        }
-        
-        private int GetBytesPerPixel(ColorType type)
-        {
-            return type == ColorType.Truecolor ? 3 : 1;
         }
         
         public byte[] Filter(byte[,] data, FilterType type)

@@ -31,7 +31,7 @@ namespace ImageConverter.Png
         
         public Image ToImage(byte[,] data, ColorType colorType)
         {
-            var bytesPerColor = GetBytesPerPixel(colorType);
+            var bytesPerColor = colorType.GetBytesPerPixel();;
             var h = data.GetLength(0);
             var w = data.GetLength(1) / bytesPerColor;
             var image = new Image(w, h);
@@ -46,11 +46,6 @@ namespace ImageConverter.Png
                 }
             }
             return image;
-        }
-        
-        private int GetBytesPerPixel(ColorType type)
-        {
-            return type == ColorType.Truecolor ? 3 : 1;
         }
         
         public T[] GetRow<T>(T[,] matrix, int rowNumber)
