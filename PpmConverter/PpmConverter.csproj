@@ -1,15 +1,11 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <OutputType>Exe</OutputType>
         <TargetFramework>net48</TargetFramework>
-        <RootNamespace>cg_assignments</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>
       <ProjectReference Include="..\ImageLibrary\ImageLibrary.csproj" />
-      <ProjectReference Include="..\PngConverter\PngConverter.csproj" />
-      <ProjectReference Include="..\PpmConverter\PpmConverter.csproj" />
     </ItemGroup>
 
 </Project>

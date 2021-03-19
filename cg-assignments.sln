@@ -6,6 +6,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImageLibrary", "ImageLibrar
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PngConverter", "PngConverter\PngConverter.csproj", "{2A3D6883-6CC4-457E-B092-55E6DA951375}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PpmConverter", "PpmConverter\PpmConverter.csproj", "{E6D76D6B-1302-4888-8146-3F3C57AA5981}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,5 +26,9 @@ Global
 		{2A3D6883-6CC4-457E-B092-55E6DA951375}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2A3D6883-6CC4-457E-B092-55E6DA951375}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2A3D6883-6CC4-457E-B092-55E6DA951375}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E6D76D6B-1302-4888-8146-3F3C57AA5981}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E6D76D6B-1302-4888-8146-3F3C57AA5981}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E6D76D6B-1302-4888-8146-3F3C57AA5981}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E6D76D6B-1302-4888-8146-3F3C57AA5981}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
