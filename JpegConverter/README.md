@@ -27,6 +27,10 @@ All the names, used in this module, are specified by this recommendation.
   - Arithmetic: 
     - [ ] Encoder
     - [ ] Decoder  
+- Compressed data formats:
+  - [x] Interchange format
+  - [ ] Abbreviated format for compressed image data
+  - [ ] Abbreviated format for table-specification data   
   
 ### Other usages list:
 - Data unit encoding order:
@@ -35,3 +39,9 @@ All the names, used in this module, are specified by this recommendation.
 - Quantized coefficients encoding procedures:
   - [x] Spectral selection
   - [ ] Successive approximation
+- Frames: 
+  - [x] Single (for sequential and progressive modes)
+  - [ ] Multiple (for hierarchical mode)  
+- Scans: 
+  - [ ] Single (all components are interleaved) 
+  - [ ] Multiple (at least two non-interleaving components groups, necessary for progressive mode)
