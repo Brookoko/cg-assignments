@@ -4,7 +4,7 @@
 ## References: 
 ### Specifications and documentation:
 - CCIT recommendation T.81: Infromation technology - digital compression and coding of 
-continuous-tone still images - requirements and guidelines: [Recommendation document link.](https://www.w3.org/Graphics/JPEG/itu-t81.pdf)\
+continuous-tone still images - requirements and guidelines: [Recommendation document link.](https://www.w3.org/Graphics/JPEG/itu-t81.pdf) \
 All the names, used in this module, are specified by this recommendation.
 
 ## Capabilities: 
