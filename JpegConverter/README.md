@@ -46,5 +46,5 @@ All the names, used in this module, are specified by this recommendation.
   - [ ] Single (all components are interleaved) 
   - [ ] Multiple (at least two non-interleaving components groups, necessary for progressive mode)
 - Extensions and addtions:
-  - [ ] APPn segments
+  - [ ] APPn segments: JFIF, EXIF
   - [ ] JPEG extensions segments 
