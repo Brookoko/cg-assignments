@@ -1,10 +1,8 @@
 namespace JpegConverter
 {
     using System;
-    using System.Collections.Generic;
     using System.Linq;
     using ImageConverter;
-    using Segmentation;
 
     public class JpegWorker : IImageWorker
     {
@@ -22,12 +20,7 @@ namespace JpegConverter
 
         private bool CheckIfCompatibleWith(byte[] bytes)
         {
-            var requirements = new List<bool>();
-            
-            requirements.Add(bytes.Take(2).ToHexString() == StartOfImageSegment.SegmentHexMarker);
-            requirements.Add(bytes.Skip(4).Take(5).ToHexString() == JfifApp0Segment.JfifIdentifierHex);
-
-            return requirements.All(requirement => requirement);
+            throw new NotImplementedException();
         }
 
         public Image Decode(byte[] bytes)
