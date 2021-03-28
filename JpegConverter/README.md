@@ -45,3 +45,6 @@ All the names, used in this module, are specified by this recommendation.
 - Scans: 
   - [ ] Single (all components are interleaved) 
   - [ ] Multiple (at least two non-interleaving components groups, necessary for progressive mode)
+- Extensions and addtions:
+  - [ ] APPn segments
+  - [ ] JPEG extensions segments 
