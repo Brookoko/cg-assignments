@@ -10,7 +10,7 @@ namespace JpegConverter.Jpeg.FileStructure.Segments
         // DQT marker: FFDB
         public JpegMarker SegmentMarker = new JpegMarker(0xDB);
 
-        public ushort Lq;
+        public ushort Lq => (ushort) (2 + QuantizationTables.Sum(table => 65 + table.Pq.Value * 64));
 
         public QuantizationTable[] QuantizationTables;
 

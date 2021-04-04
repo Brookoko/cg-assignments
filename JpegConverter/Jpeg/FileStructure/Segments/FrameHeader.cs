@@ -10,7 +10,7 @@ namespace JpegConverter.Jpeg.FileStructure.Segments
         // SOFn marker FFC0 - FFCF
         public JpegMarker SegmentMarker;
 
-        public ushort Lf;
+        public ushort Lf => (ushort) (8 + 3 * Nf);
 
         public byte P;
 
@@ -21,7 +21,7 @@ namespace JpegConverter.Jpeg.FileStructure.Segments
         public byte Nf;
 
         public FrameComponentSpecificationParameters[] FrameCspArray;
-
+        
         public byte[] ToBytes()
         {
             return SegmentMarker.ToBytes()
