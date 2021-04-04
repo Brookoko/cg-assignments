@@ -1,6 +1,6 @@
 namespace JpegConverter.Jpeg
 {
-    public enum DifferentiationType
+    internal enum DifferentiationType
     {
         Differential,
         NonDifferential
