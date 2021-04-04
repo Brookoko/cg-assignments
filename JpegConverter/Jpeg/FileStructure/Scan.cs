@@ -10,6 +10,6 @@ namespace JpegConverter.Jpeg.FileStructure
 
         public CodedSegment[] CodedSegments;
 
-        public RestartIntervalSegment[] RestartIntervalSegments;
+        public RestartIntervalSegment[] RestartIntervalSegments; 
     }
 }
