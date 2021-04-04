@@ -10,8 +10,8 @@ namespace JpegConverter.Jpeg.FileStructure.Segments
     {
         // SOS marker: FFDA 
         public JpegMarker SegmentMarker = new JpegMarker(0xDA);
-        
-        public ushort Ls;
+
+        public ushort Ls => (ushort) (6 + 2 * Ns);
 
         public byte Ns;
 
@@ -19,7 +19,7 @@ namespace JpegConverter.Jpeg.FileStructure.Segments
 
         public byte Ss;
 
-        public byte Sc;
+        public byte Se;
 
         public ByteHalf Ah;
 
@@ -34,7 +34,7 @@ namespace JpegConverter.Jpeg.FileStructure.Segments
                 .Concat(new []
                 {
                     Ss,
-                    Sc,
+                    Se,
                     ByteHalf.Join(Ah,Al)
                 })
                 .ToArray();
