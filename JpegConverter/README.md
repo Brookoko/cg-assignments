@@ -6,6 +6,7 @@
 - CCIT recommendation T.81: Infromation technology - digital compression and coding of 
 continuous-tone still images - requirements and guidelines: [Recommendation document link.](https://www.w3.org/Graphics/JPEG/itu-t81.pdf) \
 All the names, used in this module, are specified by this recommendation.
+- Ken Cabeen and Peter Gent - Image compression and the Discrete Cosine Transform : [Pdf document link](https://www.math.cuhk.edu.hk/~lmlui/dct.pdf)
 
 ## Capabilities: 
 ### Implementation checklist
