@@ -11,7 +11,7 @@ namespace JpegConverter.Jpeg.FileStructure.Structures
         public ByteHalf Tq;
 
         public ushort[] QuantizationElements;
-
+        
         public byte[] ToBytes()
         {
             var elementsBytes = ((QuantizationTablePrecision) Pq.Value).GetPrecisedTableBytes(QuantizationElements);
